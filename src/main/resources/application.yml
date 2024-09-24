@@ -1,0 +1,1 @@
+spring:  datasource:    url: jdbc:postgresql://localhost:5432/lastsecond_flight    username: postgres    password: yourPassword  jpa:    hibernate:      ddl-auto: validate      liquibase:    enabled: true
