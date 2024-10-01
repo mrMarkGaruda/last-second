@@ -9,35 +9,45 @@ import java.util.Optional;
 
 @Service
 public class FlightBookingService {
-    private List<FlightBookingDto> bookings = new ArrayList<>();
 
-    public FlightBookingDto createBooking(FlightBookingDto booking) {
-        bookings.add(booking);
-        return booking;
+    private final List<FlightBookingDto> flightBookings = new ArrayList<>();
+
+    // Create flight booking
+    public FlightBookingDto createFlightBooking(FlightBookingDto flightBookingDto) {
+        flightBookings.add(flightBookingDto);
+        return flightBookingDto;
     }
 
-    public Optional<FlightBookingDto> getBookingById(Long id) {
-        return bookings.stream().filter(b -> b.getId().equals(id)).findFirst();
+    // Get flight booking by ID
+    public Optional<FlightBookingDto> getFlightBookingById(Long id) {
+        return flightBookings.stream()
+                .filter(flightBooking -> flightBooking.getId().equals(id))
+                .findFirst();
     }
 
-    public List<FlightBookingDto> listAllBookings() {
-        return bookings;
+    // List all flight bookings
+    public List<FlightBookingDto> listAllFlightBookings() {
+        return new ArrayList<>(flightBookings);
     }
 
-    public FlightBookingDto updateBooking(Long id, FlightBookingDto updatedBooking) {
-        Optional<FlightBookingDto> existingBooking = getBookingById(id);
-        if (existingBooking.isPresent()) {
-            FlightBookingDto booking = existingBooking.get();
-            booking.setCustomerFirstName(updatedBooking.getCustomerFirstName());
-            booking.setCustomerLastName(updatedBooking.getCustomerLastName());
-            booking.setDepartureAirport(updatedBooking.getDepartureAirport());
-            // Update other fields...
-            return booking;
-        }
-        return null; // Handle properly with exceptions
+    // Update flight booking
+    public Optional<FlightBookingDto> updateFlightBooking(Long id, FlightBookingDto updatedFlightBooking) {
+        Optional<FlightBookingDto> existingBooking = getFlightBookingById(id);
+        existingBooking.ifPresent(booking -> {
+            booking.setCustomerFirstName(updatedFlightBooking.getCustomerFirstName());
+            booking.setCustomerLastName(updatedFlightBooking.getCustomerLastName());
+            booking.setCustomerIdNumber(updatedFlightBooking.getCustomerIdNumber());
+            booking.setDepartureAirport(updatedFlightBooking.getDepartureAirport());
+            booking.setDepartureDateTime(updatedFlightBooking.getDepartureDateTime());
+            booking.setArrivalAirport(updatedFlightBooking.getArrivalAirport());
+            booking.setArrivalDateTime(updatedFlightBooking.getArrivalDateTime());
+            booking.setPrice(updatedFlightBooking.getPrice());
+        });
+        return existingBooking;
     }
 
-    public boolean deleteBooking(Long id) {
-        return bookings.removeIf(b -> b.getId().equals(id));
+    // Delete flight booking
+    public boolean deleteFlightBooking(Long id) {
+        return flightBookings.removeIf(flightBooking -> flightBooking.getId().equals(id));
     }
 }

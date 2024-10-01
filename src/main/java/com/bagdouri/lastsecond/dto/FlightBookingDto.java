@@ -1,10 +1,16 @@
 package com.bagdouri.lastsecond.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class FlightBookingDto {
+
     private Long id;
     private String customerFirstName;
     private String customerLastName;
@@ -13,5 +19,5 @@ public class FlightBookingDto {
     private LocalDateTime departureDateTime;
     private String arrivalAirport;
     private LocalDateTime arrivalDateTime;
-    private Double price;
+    private double price;
 }
