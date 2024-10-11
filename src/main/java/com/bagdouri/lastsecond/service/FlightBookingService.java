@@ -1,39 +1,76 @@
 package com.bagdouri.lastsecond.service;
 
 import com.bagdouri.lastsecond.dto.FlightBookingDto;
+import com.bagdouri.lastsecond.model.FlightBooking;
+import com.bagdouri.lastsecond.repository.FlightBookingRepository;
 import com.bagdouri.lastsecond.error.FlightBookingNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FlightBookingService {
 
-    private final List<FlightBookingDto> flightBookings = new ArrayList<>();
+    private final FlightBookingRepository flightBookingRepository;
+
+    public FlightBookingService(FlightBookingRepository flightBookingRepository) {
+        this.flightBookingRepository = flightBookingRepository;
+    }
+
+    // Map FlightBookingDto to FlightBooking entity
+    private FlightBooking toEntity(FlightBookingDto dto) {
+        FlightBooking booking = new FlightBooking();
+        booking.setId(dto.getId());
+        booking.setCustomerFirstName(dto.getCustomerFirstName());
+        booking.setCustomerLastName(dto.getCustomerLastName());
+        booking.setCustomerIdNumber(dto.getCustomerIdNumber());
+        booking.setDepartureAirport(dto.getDepartureAirport());
+        booking.setDepartureDateTime(dto.getDepartureDateTime());
+        booking.setArrivalAirport(dto.getArrivalAirport());
+        booking.setArrivalDateTime(dto.getArrivalDateTime());
+        booking.setPrice(dto.getPrice());
+        return booking;
+    }
+
+    // Map FlightBooking entity to FlightBookingDto
+    private FlightBookingDto toDto(FlightBooking entity) {
+        return new FlightBookingDto(
+                entity.getId(),
+                entity.getCustomerFirstName(),
+                entity.getCustomerLastName(),
+                entity.getCustomerIdNumber(),
+                entity.getDepartureAirport(),
+                entity.getDepartureDateTime(),
+                entity.getArrivalAirport(),
+                entity.getArrivalDateTime(),
+                entity.getPrice()
+        );
+    }
 
     // Create flight booking
     public FlightBookingDto createFlightBooking(FlightBookingDto flightBookingDto) {
-        flightBookings.add(flightBookingDto);
-        return flightBookingDto;
+        FlightBooking flightBooking = toEntity(flightBookingDto);
+        FlightBooking savedBooking = flightBookingRepository.save(flightBooking);
+        return toDto(savedBooking);
     }
 
     // Get flight booking by ID
     public Optional<FlightBookingDto> getFlightBookingById(Long id) {
-        return flightBookings.stream()
-                .filter(flightBooking -> flightBooking.getId().equals(id))
-                .findFirst();
+        return flightBookingRepository.findById(id).map(this::toDto);
     }
 
     // List all flight bookings
     public List<FlightBookingDto> listAllFlightBookings() {
-        return new ArrayList<>(flightBookings);
+        return flightBookingRepository.findAll().stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
     }
 
     // Update flight booking
     public FlightBookingDto updateFlightBooking(Long id, FlightBookingDto updatedFlightBooking) {
-        FlightBookingDto existingBooking = getFlightBookingById(id)
+        FlightBooking existingBooking = flightBookingRepository.findById(id)
                 .orElseThrow(() -> new FlightBookingNotFoundException(id));
 
         existingBooking.setCustomerFirstName(updatedFlightBooking.getCustomerFirstName());
@@ -45,11 +82,16 @@ public class FlightBookingService {
         existingBooking.setArrivalDateTime(updatedFlightBooking.getArrivalDateTime());
         existingBooking.setPrice(updatedFlightBooking.getPrice());
 
-        return existingBooking;
+        FlightBooking savedBooking = flightBookingRepository.save(existingBooking);
+        return toDto(savedBooking);
     }
 
     // Delete flight booking
     public boolean deleteFlightBooking(Long id) {
-        return flightBookings.removeIf(flightBooking -> flightBooking.getId().equals(id));
+        if (flightBookingRepository.existsById(id)) {
+            flightBookingRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
