@@ -1,10 +1,18 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/lastsecond_flight
+    url: jdbc:postgresql://localhost:8443/lastsecond_flight
     username: postgres
-    password: yourPassword
+    password: 2212
   jpa:
     hibernate:
       ddl-auto: validate
   liquibase:
     enabled: true
+
+server:
+  ssl:
+    key-store-type: PKCS12
+    key-store: classpath:keystore/baeldung.p12
+    key-store-password: 221209
+    key-alias: baeldung
+  port: 8443

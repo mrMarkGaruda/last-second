@@ -44,7 +44,7 @@ public class FlightBookingController {
     // Update a flight booking
     @PutMapping("/{id}")
     public ResponseEntity<FlightBookingDto> updateFlightBooking(@PathVariable Long id, @RequestBody FlightBookingDto flightBookingDto) {
-        Optional<FlightBookingDto> updatedBooking = flightBookingService.updateFlightBooking(id, flightBookingDto);
+        Optional<FlightBookingDto> updatedBooking = Optional.ofNullable(flightBookingService.updateFlightBooking(id, flightBookingDto));
         return updatedBooking.map(ResponseEntity::ok)
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
