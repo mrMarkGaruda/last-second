@@ -1,6 +1,7 @@
 package com.bagdouri.lastsecond.service;
 
 import com.bagdouri.lastsecond.dto.FlightBookingDto;
+import com.bagdouri.lastsecond.error.FlightBookingNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,18 +32,19 @@ public class FlightBookingService {
     }
 
     // Update flight booking
-    public Optional<FlightBookingDto> updateFlightBooking(Long id, FlightBookingDto updatedFlightBooking) {
-        Optional<FlightBookingDto> existingBooking = getFlightBookingById(id);
-        existingBooking.ifPresent(booking -> {
-            booking.setCustomerFirstName(updatedFlightBooking.getCustomerFirstName());
-            booking.setCustomerLastName(updatedFlightBooking.getCustomerLastName());
-            booking.setCustomerIdNumber(updatedFlightBooking.getCustomerIdNumber());
-            booking.setDepartureAirport(updatedFlightBooking.getDepartureAirport());
-            booking.setDepartureDateTime(updatedFlightBooking.getDepartureDateTime());
-            booking.setArrivalAirport(updatedFlightBooking.getArrivalAirport());
-            booking.setArrivalDateTime(updatedFlightBooking.getArrivalDateTime());
-            booking.setPrice(updatedFlightBooking.getPrice());
-        });
+    public FlightBookingDto updateFlightBooking(Long id, FlightBookingDto updatedFlightBooking) {
+        FlightBookingDto existingBooking = getFlightBookingById(id)
+                .orElseThrow(() -> new FlightBookingNotFoundException(id));
+
+        existingBooking.setCustomerFirstName(updatedFlightBooking.getCustomerFirstName());
+        existingBooking.setCustomerLastName(updatedFlightBooking.getCustomerLastName());
+        existingBooking.setCustomerIdNumber(updatedFlightBooking.getCustomerIdNumber());
+        existingBooking.setDepartureAirport(updatedFlightBooking.getDepartureAirport());
+        existingBooking.setDepartureDateTime(updatedFlightBooking.getDepartureDateTime());
+        existingBooking.setArrivalAirport(updatedFlightBooking.getArrivalAirport());
+        existingBooking.setArrivalDateTime(updatedFlightBooking.getArrivalDateTime());
+        existingBooking.setPrice(updatedFlightBooking.getPrice());
+
         return existingBooking;
     }
 
