@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:8443/lastsecond_flight
+    url: jdbc:postgresql://localhost:5432/lastsecond_flight
     username: postgres
     password: 2212
   jpa:
@@ -8,6 +8,7 @@ spring:
       ddl-auto: validate
   liquibase:
     enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml  # Ensure this path is correct
 
 server:
   ssl:

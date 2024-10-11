@@ -22,7 +22,7 @@ public class FlightBooking {
     private LocalDateTime departureDateTime;
     private String arrivalAirport;
     private LocalDateTime arrivalDateTime;
-    private double price;
+    private Double price;
 
     // No need to explicitly define getters and setters
 }
