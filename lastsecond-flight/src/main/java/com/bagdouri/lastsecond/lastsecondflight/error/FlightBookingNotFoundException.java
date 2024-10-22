@@ -1,4 +1,4 @@
-package com.bagdouri.lastsecond.error;
+package com.bagdouri.lastsecond.lastsecondflight.error;
 
 public class FlightBookingNotFoundException extends RuntimeException {
     public FlightBookingNotFoundException(Long id) {

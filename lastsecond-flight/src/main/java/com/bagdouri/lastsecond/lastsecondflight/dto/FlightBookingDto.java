@@ -1,4 +1,4 @@
-package com.bagdouri.lastsecond.dto;
+package com.bagdouri.lastsecond.lastsecondflight.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

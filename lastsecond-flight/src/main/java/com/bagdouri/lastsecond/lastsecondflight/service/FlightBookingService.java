@@ -1,9 +1,9 @@
-package com.bagdouri.lastsecond.service;
+package com.bagdouri.lastsecond.lastsecondflight.service;
 
-import com.bagdouri.lastsecond.dto.FlightBookingDto;
-import com.bagdouri.lastsecond.model.FlightBooking;
-import com.bagdouri.lastsecond.repository.FlightBookingRepository;
-import com.bagdouri.lastsecond.error.FlightBookingNotFoundException;
+import com.bagdouri.lastsecond.lastsecondflight.dto.FlightBookingDto;
+import com.bagdouri.lastsecond.lastsecondflight.error.FlightBookingNotFoundException;
+import com.bagdouri.lastsecond.lastsecondflight.model.FlightBooking;
+import com.bagdouri.lastsecond.lastsecondflight.repository.FlightBookingRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

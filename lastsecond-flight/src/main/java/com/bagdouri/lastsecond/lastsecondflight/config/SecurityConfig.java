@@ -1,4 +1,4 @@
-package com.bagdouri.lastsecond.config;
+package com.bagdouri.lastsecond.lastsecondflight.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

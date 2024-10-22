@@ -1,7 +1,7 @@
-package com.bagdouri.lastsecond.controller;
+package com.bagdouri.lastsecond.lastsecondflight.controller;
 
-import com.bagdouri.lastsecond.dto.FlightBookingDto;
-import com.bagdouri.lastsecond.service.FlightBookingService;
+import com.bagdouri.lastsecond.lastsecondflight.dto.FlightBookingDto;
+import com.bagdouri.lastsecond.lastsecondflight.service.FlightBookingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.bagdouri.lastsecond.model;
+package com.bagdouri.lastsecond.lastsecondflight.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

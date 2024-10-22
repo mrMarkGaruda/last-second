@@ -1,4 +1,4 @@
-package com.bagdouri.lastsecond.error;
+package com.bagdouri.lastsecond.lastsecondflight.error;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 

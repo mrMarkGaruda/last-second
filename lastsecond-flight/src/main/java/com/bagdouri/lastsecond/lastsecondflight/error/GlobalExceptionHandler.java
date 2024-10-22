@@ -1,4 +1,4 @@
-package com.bagdouri.lastsecond.error;
+package com.bagdouri.lastsecond.lastsecondflight.error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
