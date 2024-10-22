@@ -1,17 +1,17 @@
 databaseChangeLog:
   - changeSet:
-      id: 1
+      id: 2
       author: yourname
       changes:
         - createTable:
-            tableName: flight_booking
+            tableName: hotel_booking
             columns:
               - column:
                   name: id
-                  type: BIGSERIAL  # Use BIGSERIAL for auto-incrementing in PostgreSQL
+                  type: BIGSERIAL
                   constraints:
                     primaryKey: true
-                    nullable: false  # Optional but recommended
+                    nullable: false
               - column:
                   name: customer_first_name
                   type: VARCHAR(255)
@@ -22,16 +22,13 @@ databaseChangeLog:
                   name: customer_id_number
                   type: VARCHAR(255)
               - column:
-                  name: departure_airport
+                  name: hotel_name
                   type: VARCHAR(255)
               - column:
-                  name: departure_date_time
+                  name: check_in_date_time
                   type: TIMESTAMP
               - column:
-                  name: arrival_airport
-                  type: VARCHAR(255)
-              - column:
-                  name: arrival_date_time
+                  name: check_out_date_time
                   type: TIMESTAMP
               - column:
                   name: price
