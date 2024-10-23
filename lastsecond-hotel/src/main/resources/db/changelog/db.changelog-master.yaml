@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: yourname
+      changes:
+        - createTable:
+            tableName: hotel_booking
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: customer_first_name
+                  type: VARCHAR(255)
+              - column:
+                  name: customer_last_name
+                  type: VARCHAR(255)
+              - column:
+                  name: customer_id_number
+                  type: VARCHAR(255)
+              - column:
+                  name: hotel_name
+                  type: VARCHAR(255)
+              - column:
+                  name: check_in_date_time
+                  type: TIMESTAMP
+              - column:
+                  name: check_out_date_time
+                  type: TIMESTAMP
+              - column:
+                  name: price
+                  type: FLOAT
